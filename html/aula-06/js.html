@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 06</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <input class="form-control mb-3 mt-3" type="number" id="cepDigitado" placeholder="Digite seu cep">
+        <button class="btn btn-primary btn-sm mb-3" onclick="pesquisarCep()">Pesquisar</button>
+        <div class="spinner-border text-warning" role="status" id="spinner" style="display: none;">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        <!-- beforeBegin -->
+        <table class="table table-hover" id="listagem">
+            <!-- afterBegin -->
+            <tr class="table-dark">
+                <th>CEP</th>
+                <th>Logradouro</th>
+                <th>Complemento</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+            </tr>
+            <!-- beforeEnd -->
+        </table>
+        <!-- afterEnd -->
+    </div>
+    <script>
+        function pesquisarCep() {
+            document.querySelector("#spinner").style.display = "block"
+            var cep = document.querySelector("#cepDigitado").value
+            fetch("https://viacep.com.br/ws/"+ cep +"/json/")
+                .then(response => response.json())
+                .then(response => {
+                    document.querySelector("#listagem")
+                        .insertAdjacentHTML("beforeEnd", `
+                        <tr>
+                            <td>${response.cep}</td>
+                            <td>${response.logradouro}</td>
+                            <td>${response.complemento}</td>
+                            <td>${response.bairro}</td>
+                            <td>${response.localidade}</td>
+                            <td>${response.uf}</td>
+                            
+                        </tr>
+                        `)
+                    document.querySelector("#spinner").style.display = "none"
+                })
+            // alert(cep)
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
