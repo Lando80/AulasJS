@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Botao from './Botao';
 import Logo from './Logo';
+import ListaTarefas from './ListaTarefas';
+import ListaImagens from './ListaImagens';
+import BotaoLegal from './BotaoLegal';
+import Alert from './Alert';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -9,6 +13,14 @@ root.render(
     <h1>Olá Enfermeira</h1>
     <Logo/>
     <Botao/>
+    <ListaTarefas/>
+    <ListaImagens/>
+    <BotaoLegal texto="Cadastrar"/>
+    <BotaoLegal texto="Um rango Legal"/>
+    <Alert>
+      <p>Descrição do Erro</p>
+    </Alert>
+    
   </div>
 );
 
