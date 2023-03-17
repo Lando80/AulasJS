@@ -6,6 +6,9 @@ import ListaTarefas from './ListaTarefas';
 import ListaImagens from './ListaImagens';
 import BotaoLegal from './BotaoLegal';
 import Alert from './Alert';
+import Login from './Login';
+import Usuarios from './Usuarios/Usuarios';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +23,8 @@ root.render(
     <Alert>
       <p>Descrição do Erro</p>
     </Alert>
+    <Login/>
+    <Usuarios/>
     
   </div>
 );
