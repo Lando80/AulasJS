@@ -1,31 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Botao from './Botao';
-import Logo from './Logo';
-import ListaTarefas from './ListaTarefas';
-import ListaImagens from './ListaImagens';
-import BotaoLegal from './BotaoLegal';
-import Alert from './Alert';
-import Login from './Login';
-import Usuarios from './Usuarios/Usuarios';
-
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import Index from './pages/Index';
+import Sobre from './pages/Sobre';
+import Contato from './pages/Contato';
+import Usuario from './pages/Usuario';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div>
-    <h1>Olá Enfermeira</h1>
-    <Logo/>
-    <Botao/>
-    <ListaTarefas/>
-    <ListaImagens/>
-    <BotaoLegal texto="Cadastrar"/>
-    <BotaoLegal texto="Um rango Legal"/>
-    <Alert>
-      <p>Descrição do Erro</p>
-    </Alert>
-    <Login/>
-    <Usuarios/>
-    
+    <h1>Minha Aplicação Linda</h1>
+    <BrowserRouter>
+      <Link to="/">Home</Link> |
+      <Link to="/sobre">Sobre</Link> |
+      <Link to="/contato">Contato</Link>
+      <Routes>
+        <Route path='/' element={<Index/>}/>
+        <Route path='/sobre'element={<Sobre/>}/>
+        <Route path='/contato'element={<Contato/>}/>
+        <Route path='/usuario/:id' element={<Usuario/>}/>
+      </Routes>
+    </BrowserRouter>
   </div>
 );
 
