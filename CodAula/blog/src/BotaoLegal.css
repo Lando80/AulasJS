@@ -1,0 +1,28 @@
+.botaoLegal {
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.roxo {
+    background-color: purple;
+    color: #fff;
+    border: 1px solid purple;
+}
+
+.roxo:hover {
+    background-color: #fff;
+    color: purple;
+    border: 1px solid purple;
+}
+
+.cinza {
+    background-color: #ccc;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.cinza:hover {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
