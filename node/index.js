@@ -1,7 +1,12 @@
-const funcoes = require('./matematica')
+const express = require('express')
+const app = express()
+const path = require('path')
+const router = require('./routes')
 
-const resultado1 = funcoes.soma(5, 5)
-const resultado2 = funcoes.subtrair(15, 2)
+app.use(express.static('public'))
 
-console.log(resultado1)
-console.log(resultado2)
+app.use('/', router)
+
+app.listen(8080, () => {
+    console.log('O servidor foi iniciado')
+})
