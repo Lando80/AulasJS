@@ -1,0 +1,16 @@
+<h1>Editar Produto</h1>
+
+<div class="container">
+    <form action="/produtos/{{ produto.id }}" method="POST">
+        <div class="mb-4">
+            <label for="nome">Nome</label>
+            <input type="text" 
+                class="form-control" 
+                name="nome" 
+                placeholder="Digite o nome do produto"
+                value="{{ produto.nome }}"
+            >
+        </div>
+        <input type="submit" class="btn btn-primary" value="Salvar">
+    </form>
+</div>

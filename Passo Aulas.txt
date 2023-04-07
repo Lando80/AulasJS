@@ -1,0 +1,177 @@
+﻿Aula 14/03
+
+rafce – cria uma estrutura para iniciar o codigo (tem que instalar a extensão no vscode)
+
+usestate – um hook do react
+
+
+module.css
+
+children
+
+extensão jsx (página?)
+extensão js (componente?)
+
+
+aplicação do contextProvider e children
+
+dependencias
+axios
+router-dom
+font-awesome (entrar no site e ver o passo a passo para instalar as dependencias)
+bootstrap react (entrar no site, primeiro link “get start” aparece o comando do npm)
+lodash usar arrays (entrar no site e ver como instala com npm)
+
+reiniciar o servidor para reconhecer as novas dependências
+
+
+BrowserRouter para criar as rotas
+
+gerador de logo netflix
+
+class NavLink (deixa o link destacado)
+
+tmdb (pegar os filmes)
+
+react-formik adiciona validações no react, entrar no site, verificar o comando para instalar, parar o servidor antes de instalar, depois iniciar o servidor novamente.
+
+Toast react js
+
+
+node
+instalar o express (entra no site do npm e pesquisar pro express, seguir o passo a passo
+
+instalar o nodemon (npm i nodemon), adicionar o script “dev”: “ nodemon index.js”
+
+template engine (handlebars) npm install express-handlebars
+verificar a documentação para ver como utilizar
+
+crud → funções básicas para trabalhar com banco de dados
+criar / listar / atualizar / deletar
+
+configurar o index.js para receber dados de formulário
+app.use(express.urlencoded(extended: true)
+app.use(express.json())
+------
+
+Roteiro da aula 06/04/22
+
+Node:
+criar a pasta
+abrir o vs code
+no terminal executar npm init (next next next)
+criar o arquivo index.js na raiz do projeto
+instalar o express: npm install express express-handlesbars nodemon
+* area de scrips, onde se cria comandos do linux (no arquivo package.jason
+criar o scripr “dev”:”nodemon index.js
+* quando for executar o servidor, executar o comando npm run dev
+
+configurar o express
+	const express = require(‘express’)
+	const app = express()
+
+	app.listen(3000, () => {console.log(‘servidor iniciado’})
+
+configurar rota
+criar o arquivo routes.js
+	const express = require(‘express’)
+	const router = express.Router()
+
+	router.get(‘/’, function (req, res){
+		res.send(‘Helo word)
+	}
+	
+	module.exports = router
+
+configurar o arquivo index.js
+adicionar app.use(‘/’, router) Obs.: verificar se o router vai ser importado.
+
+Criar a pasta controllers, criar um arquivo ContatosController.js
+criar o codigo da classe
+
+class ContatoController {
+	
+}
+
+modificar o routes.js
+router.get(‘/’, ContatosController.index)
+
+criar a pasta views
+
+configurar o handlebars no arquivo index.js
+
+const {engine} = require(‘express-handlebars’)
+app.engine(‘handlebars’, engine())
+app.set(‘view engine’, ‘handlebars’)
+app.set(‘views’, ‘./views’)
+
+criar o index.handlebars na pasta views e criar o código html
+
+criar a pasta layouts dentro da pasta views, criar o arquivo main.handlebars e criar o codigo html
+
+criar a pasta public na raiz do projeto
+no index.js colocar app.use(express.static(‘public’))
+
+fazer o crud
+fazer uma variavel fake para simular o banco de dados no arquivo ContatosControlle.js
+
+var contatos = [
+	{id: 1, nome: ‘Pessoa1’, numero: ‘99-9999-9999’},
+	{id: 2, nome: ‘Pessoa2’, numero: ‘99-7777-9999’},
+	{id: 3, nome: ‘Pessoa3’, numero: ‘99-8888-9999’}
+]
+
+modificar a linha de resposta do método index
+res.render(‘index’, {contatos: contatos})
+
+fazer o condigo para exibir os dados no arquivo index.handlebars
+
+criar uma nova rota
+router.get(‘/novo’, ContatosController.novo)
+
+editar o controller
+static novo(req, res) {
+	res.render(‘novo’)
+}
+
+criar o arquivo novo.handlebars e editar um formulario
+criar a rota /novo do tipo post
+
+editar o index.js para desbloquear o recebimento dos dados do formulario
+
+app.use(express.urlencoded({ extended: true })
+app.use(express.json())
+
+editar o controler
+static salvarNovo (req, res) {
+	const nome = req.body.nome
+	const numero = req.body.numero
+
+	contatos.push({
+		id: contatos.length + 1,
+		nome: nome,
+		numero: numero
+	})
+	res.redirect(‘/’)	
+}
+
+...intervalo
+rota exluir
+controller excluir
+
+atualizar…
+criar uma nota rota get (‘/editar/:id’, ContatosContreoller.edit)
+criar o metodo edit no controller
+criar o editar.handlerbars
+criar o botão de editar no index.handlerbars
+criar a rota tipo post router.post(‘/editar/:id’, ContatosController.salvarEditar)
+criar o metodo no controller
+
+
+-----
+desinstalar o handlebars (npm remove express-handlebar)
+comentar todos as linhas que utilizam o handlebar
+
+utilizar o insomnia
+instalar o insomnia (baixar de grátis na internet)
+
