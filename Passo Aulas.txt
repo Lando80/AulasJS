@@ -175,3 +175,19 @@ comentar todos as linhas que utilizam o handlebar
 utilizar o insomnia
 instalar o insomnia (baixar de grátis na internet)
 
+para exluir utilizar o método delete
+
+o metodo editar morréu
+para editar utilizar o método put
+
+
+----
+11/04
+Banco de dados
+utilizar o orm sequelize
+instalar o sequelize cli
+npm install -g sequelize-cli (instala o sequelize globalmente)
+depois colocar o sequelize no projeto: npm i sequelize
+utilizar o mysql2: npm i mysql2
+inicializar o sequelize utilizando o comando sequelize init
+

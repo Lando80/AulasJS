@@ -1,70 +1,50 @@
-var contatos = [
-    { id: 1, nome: 'Adéliton', numero: 999999999 },
-    { id: 2, nome: 'João', numero: 88888888 },
-    { id: 3, nome: 'Maria', numero: 777777777 }
-]
+// var contatos = [
+//     { id: 1, nome: 'Adéliton', numero: 999999999 },
+//     { id: 2, nome: 'João', numero: 88888888 },
+//     { id: 3, nome: 'Maria', numero: 777777777 }
+// ]
+
+const {contatos} = require("../models/")
+
 
 class ContatosController {
-    static index(req, res) {
-        // res.render('index', {
-        //     contatos: contatos
-        // })
-        res.json(contatos)
+
+    static async index(req, res) {
+        const list = await contatos.findAll()
+        
+        res.json(list)
     }
 
-    // static novo(req, res) {
-    //     // res.render('novo')
-    // }
-
-    static salvarNovo(req, res) {
+    static async salvarNovo(req, res) {
         const { nome, numero } = req.body
-        const contato = {
-            id: contatos.length + 1,
+
+        const contato = await contatos.create({
             nome: nome,
             numero: numero
-        }
-
-        contatos.push(contato)
+        })
 
         res.json(contato)
     }
 
-    static excluir(req, res) {
+    static async excluir(req, res) {
         const { id } = req.params
-        contatos = contatos.filter((contato) => {
-            return contato.id != id
-        })
+        const contato = await contatos.findByPk(id)
+        contato.destroy()
 
-        // res.redirect('/')
+        res.json(true)
     }
 
-    static editar(req, res) {
-        const { id } = req.params
-
-        const contato = contatos.find((contato) => {
-            return contato.id == id
-        })
-        
-        res.render('editar', {
-            contato: contato
-        })
-    }
-
-    static salvarEditar(req, res) {
+    static async salvarEditar(req, res) {
         const { id } = req.params
         const { nome, numero } = req.body
 
-        const index = contatos.findIndex((contato) => {
-            return contato.id == id
-        })
-
-        contatos[index] = {
-            id: id,
+        const contato = await contatos.findByPk(id)
+        contato.update({
             nome: nome,
             numero: numero
-        }
+        })
 
-        // res.redirect('/')
+        res.json(contato)
     }
 }
 
