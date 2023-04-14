@@ -190,4 +190,94 @@ npm install -g sequelize-cli (instala o sequelize globalmente)
 depois colocar o sequelize no projeto: npm i sequelize
 utilizar o mysql2: npm i mysql2
 inicializar o sequelize utilizando o comando sequelize init
+configurar o arquivo do banco de dados
+criar o banco de dados usando sequelize db:create
+criar a tabela contatos usando sequelize migration:generate --name=contatos
+editar a migration
+executar sequelize db:migrate
+criar a model
+sequelize model:generate --name=contatos --attributes=id:integer
+
+----
+13/04
+** rotas no padrao rest
+-
+criar tabelas de usuarios
+sequelize model:generate --name=usuarios --attributes=nome:STRING100,email200,senha:STRING512,data_nascimento:DATEONLY,status:CHAR1
+configurar a migrate e a model
+executar sequelize db:migrate
+criar uma seed
+sequelize seed:generate --name=usuarios
+-utilizar um modo de criptografar senha
+npm bcrypt (ver a documentação)
+npm install bcrypt
+criar um salt
+
+|const bcrypt = require('bcrypt')
+|
+|    const salt = await bcrypt.genSalt()
+|    const password = await bcrypt.hash('123', salt)
+|
+|    await queryInterface.bulkInsert('usuarios', [{
+|      nome: 'Administrador',
+|      email: 'admin@admin.com',
+|      senha:'123',
+|      data_nascimento: '2001-01-01',
+|      status: 'A',
+|      createdAt: '2021-01-01 00:00:00',
+|      updatedAt: '2021-01-01 00:00:00'
+|    }], {});
+
+executar sequelize db:seed --seed=20230413230106-usuarios
+
+fazer o login
+1. Rota "/login" - email, senha
+2. verificar se usuario existe e esta tivo
+3. comparar senha salva
+
+
+fazer a rota login
+|router.post('/login', LoginController.makeLogin)
+|const {usuarios} = require("../models")
+
+|class LoginController {
+|
+|    static async makeLogin(req, res){
+|        const { email, senha } = req.body
+|
+|        const usuarioObj = await usuarios.findOne({
+|            where:{
+|                email: email,
+|                status: 'A'
+|            }
+|        })
+|        if(!usuarioObj){
+|            res.status(401).json({
+|                error: "Usuário ou senha inválidos"
+|            }).end()
+|        }
+|    }
+|}
+|module.exports = LoginController
+
+fazer o token do id do usuario
+instalar jwt 
+npm install jsonwebtoken
+
+|const sucesso = await bcrypt.compare(senha, usuarioObj.senha)
+|            if(sucesso){
+|                const token = await jwt.sign(usuarioObj.id, '@#@$@#$!')
+|                res.json({
+|                    token: token
+|                })
+
+instalar pacote para configurar o .env
+instala o dot env
+npm install dotenv
+
+fazer as configurações... olhar a documentação
+
+
+
+
 
