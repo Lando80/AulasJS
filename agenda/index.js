@@ -10,5 +10,5 @@ app.use(express.static('public'))
 app.use('/', router)
 
 app.listen(3000, () => {
-    console.log(`servidor iniciado`)
+    console.log(`servidor iniciado na porta 3000`)
 })

@@ -276,6 +276,211 @@ instala o dot env
 npm install dotenv
 
 fazer as configurações... olhar a documentação
+-----
+aula 18/04 autenticação
+..
+.
+.
+relacionamentos
+
+--------------------------
+
+projeto
+flexfood
+criar a pasta flexfood
+criar pasta backend
+criar pasta frontend
+iniciar pelo backend
+npm inicio -y
+instalar os modulos 
+(
+npm install expess
+npm install mysql2
+npm install nodemon --save=dev
+npm install sequelize
+npm install dotenv
+npm install bcrypt
+npm install jsonwebtoken
+)
+configurar o nodemon -> colocar no scrip "dev":"npm run index.js"
+
+criar o arquivo index.js na raiz
+const express = require('express')
+const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true})
+
+criar aquivo de rota (seguir os padroes)
+criar a pasta chamada routes e nele criar os arquivos de rota
+rota publico.js
+const express = require('express')
+const router = express.Router()
+
+router.get('/', PuclicoController.index)
+module.exports = router
+ 
+criar a pasta controller
+criar a pasta publico
+criar o arquivo PublicoController.js
+module.exportes = class PublicoController {
+	static index(req, res){
+	res.json('sucesso')
+}
+
+no arquivo index
+app.use('/', router)
+app.listem(3000, ()=>{
+console.log('servidor iniciado)
+}
+
+fazer o brainstorn
+funcionalidades
+	cadastro de usuarios
+		categoria de usuario
+			-> usuarios
+	cadastro de restaurantes
+		endereço
+			-> endereços
+	cadastro de entregadores
+		-> entregadores
+	cadastro de produtos
+		-> produtos
+	cadastro de forma de pagamento
+		-> forma de pagamentos
+	login
+		token de validação
+		esqueci a senha
+		Login de redes sociais
+	produtos favoritos
+		-> favoritos_usuarios
+	carrinhos de compras
+		->pedidos
+	menu de busca de produtos ou restaurantes
+	cupom de desconto
+		-> cupom
+	rastreamento e, tempo real do entregador
+		->trajetos
+	status do pedido
+	historico de pedidos
+	categoria de entrega (expressa, normal, retirado, agendado)
+	agendamento de entrega
+	chat de comunicação
+	.
+	.
+	.
+
+npm i -g sequelize-cli
+sequelize init (vai criar pastas e arquivos)
+criar o arquivo .env
+	DB_USER=root
+	DB_PASSWORD=
+	DB_DATABASE=flexfood
+	DB_HOST=127.0.0.1
+
+modificar o arquivo consfig.js
+require('dotenv').config()
+module.exports = {
+  develoment: {
+  .
+  .
+  .
+alterar apara a model pegar um arquivo js
+
+criar o banco de dados
+sequelize db:create flexfood
+
+criar as models
+sequelize model:generate --name-usuarios --attibutes+nome:STRING,emai:STRING,senha:STRING,status:CHAR,tipo:CHAR
+* colocar nos campos CHAR o tamanho (1)
+sequelize db:migrate
+
+editar a rota publica
+router.post('/registrar, 
+
+criar o controller de usuarios
+UsuariosController.js
+
+const {usuarios} = require('../models')
+
+module.exports = class UsuariosController{
+    static async store(req, res){
+        try{
+        const = await usuarios.create({
+            nome: req.body.nome,
+            email: req.body.email,
+            status: 'A',
+            tipo: req.body.tipo,
+            senha: req.body.senha
+        })
+        }catch(e)
+    }
+        
+editar a Model de usuarios
+importar o bcrypt -> 
+senha:{
+  type: DataTypes.STRING,
+  async set(value){
+    const salt = waiat bcrypt.genSalt(12)
+    const senha = await bcrypt.hast(value, salt)
+    this.setDataValue('senha', senha)
+    }, {
+        fields: ['id', 'email','nome']
+    .
+    .
+    .
+
+criar o fazer login
+rota:
+router.post('/login, UsuariosController.login)
+
+criar o metodo no crontroller
+
+static async login(req, res){
+  const usuario = await usuaris.findOne({
+    where:{
+      email: req.body.email,
+      status: 'A'
+    }
+    if (usuario){
+      const senhaCorreta = await bcryot.compare(req.body.senha, usuario)
+      if(senhaCorreta){
+        const token = await jwt.sign(usuario.id, JWT_KEY)
+      }
+      .
+      .
+      . *tem que importar o jtw e o dotenv
+    }else{
+      res.status(401).json({
+      error: 'usuario ou senha inalidos
+    })
+    }
+  }) ** colocar o codigo no try catch
+
+----
+criar o crud de restaurantes
+sequelize model:generate --name=restaurante --attibutes=nomes:STRING,logo:STRING,status:CHAR
+sequelize db:migrate
+
+criar rota privada
+privado.js
+  const express = require('express')
+  const router = express.Router()
+  
+  router.get('/', RestauranteController.index
+  
+  module.exports = router  
+  
+* criar a Controoler de restaurante
+edita o controller de restaurante
+editar o arquivo index por causa das duas rotas barras
+
+
+
+
+
+
+
 
 
 

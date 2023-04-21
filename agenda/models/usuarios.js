@@ -14,7 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   usuarios.init({
-    nome: DataTypes.STRING(100),
+    nome: {
+      type: DataTypes.STRING(100),
+      get() {
+        return this.getDataValue('nome').toUpperCase()
+      },
+      set(value) {
+        this.setDataValue('nome', value.trim())
+      }
+    },
     email: DataTypes.STRING(200),
     senha: DataTypes.STRING(512),
     data_nascimento: DataTypes.DATEONLY,
