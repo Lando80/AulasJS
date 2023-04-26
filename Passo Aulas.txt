@@ -475,12 +475,114 @@ privado.js
 edita o controller de restaurante
 editar o arquivo index por causa das duas rotas barras
 
+-----
+
+Swagger -> cria documentação
+
+validação de token
+
+static vaidaToken(req, res, next){
+  const token = req.headers['authorization]
+  jwt.verify(token, process.env.KWT_KEY, (error, success) =>{
+    if(error){
+      res.status(401).json({
+        error: 'Token invalido'
+      })
+    }else{
+      req.userID = success
+      next()
+    }
+  }
 
 
+ap.use('/', UsuarioController.validaToken), router)
+
+-----------
+
+criar a model e migration
+
+sequelize model:generate --name=produtos --attibutes=nome:STRING,valor:DECIMAL,foto:STRING,restaurante_id:INTEGER,descricao:TEXT,quantidade_estoque:INTEGER
+
+chave estrangeira
+restaurante_id:{
+  type: Sequelize.INTEGER,
+  references:{
+    model: {
+      rableName: 'restaurantes'
+    },
+    key: id
+  }
+}
+
+sequelize db:migrate
+
+sequelize db:migrate:undo
+
+crud de produtos
+
+primeiro criar o controller
+
+ProdutosController.js
+
+const { produtos } = require('../models')
+const { restaurantes } = require('../models')
+
+module.exportes = class ProsutosController {
+  static async index(req, res){
+    try{
+      
+    }catch(e){
+      
+    }
+  
+  }
+  
+  static async store(req, res){
+    try{
+    
+      const restaurante = await restaurantes.findOne({
+        where: {
+          usuario_id: req.usuarioId
+        }
+      })
+    
+      await produtos.create({
+        nome: req.body.nome,
+        valor: req.body.valor,
+        foto: req.body.foto,
+        restaurante_id: restaurante.id
+      })
+    }catch(e){
+      res.status(500).json({
+        error: e.message
+      })
+    }
+    
+    res.json('ok')
+  }
+  
+  static async update(req, res){
+  
+  }
+  
+  static async destroy(req, res){
+  
+  }
+  
+}
 
 
+rotas
 
+router.post('/produtos', ProdutosController.store)
 
+-----
+lado do cliente
+
+----
+tabela intermediaria
+
+sequelize model:generate --name=produtos_favoritos --attibutes=usuario_id:INTEGER,prodto_id:INTEGER
 
 
 
