@@ -584,7 +584,62 @@ tabela intermediaria
 
 sequelize model:generate --name=produtos_favoritos --attibutes=usuario_id:INTEGER,prodto_id:INTEGER
 
+----- react ----
 
+npm create-react-app frontend
+abrir no vscode
+executar npm start
+excluir arquivos desnecessoarios
+
+deixar index.js e index.css e adequar o codigo
+instalar o pacote concorrente do bootstrap
+MUI
+entrar no site e pegar o codigo para instalar
+pegar um componente
+botão
+obs: tem que importar.... apaga uma letra da tag e digita denovo para o vscode mostar a opção
+criar pagina pages em scr
+criar uma pasta login
+criar o componente Login.js
+rafce
+instalar o router dom
+npm install router-dom
+criar o arquivo rotas.js
+rafce
+configurar a rota
+ir no site do mui ui
+pegar um template
+* prop sx para configurar o css
+
+configurar pagina de login
+pegar uma logo da internet
+
+pegar um componente no mui. textfiel, pra email e senha
+ir no item de api, ver as props do textfiels
+criar 3 botoes
+fazer o cadastrar cliente
+fazer o cadastrar fornecedor
+instalar o axios
+criar pasta services
+criar o arquivo api.js
+configurar o axios
+criar o ponto env
+criar .env na raiz
+
+instalar o mui ui lab para poder usar o loading button
+instalar o cors
+importar o cors e utilizar o app.us (cors)
+usar o snacbar
+criar o alert de sucesso
+criar o alert de erro
+
+configurar o login
+
+criar a rota de dashboard
+
+usar drawer
+
+instalar o mui aicon material
 
 
 
