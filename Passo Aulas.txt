@@ -640,6 +640,22 @@ criar a rota de dashboard
 usar drawer
 
 instalar o mui aicon material
+-----
 
+configurar o menu lateral
+box
+ list
+  listItem
+   ListItemButton
+    ListItemIcon
+    ListItemText
+    
+criar pasta componentes
+ItemDaLista.jsx
+
+   
+   
+   multer -> modulo que trabalha com upload de arquivos
+entrar no site e ver como instalar no projeto
 
 
